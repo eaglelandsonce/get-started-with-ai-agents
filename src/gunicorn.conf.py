@@ -388,6 +388,16 @@ async def create_agent(ai_project: AIProjectClient,
     else:
         logger.warning("No search tool available. Creating agent without search tool.")
 
+    # Optional class demo mode for a simple customization walkthrough.
+    if os.getenv("CLASSROOM_DEMO_MODE", "false").lower() == "true":
+        instructions = (
+            f"{instructions} "
+            "You are Campus Helper Bot. Answer questions about class policies using only the uploaded files. "
+            "Keep answers short and student-friendly. If the answer is not in the files, say you could not find it in the handbook. "
+            "Never invent class policies."
+        )
+        logger.info("CLASSROOM_DEMO_MODE is enabled. Using Campus Helper Bot instructions.")
+
     agent = await ai_project.agents.create_version(
         agent_name=os.environ["AZURE_AI_AGENT_NAME"],
         definition=PromptAgentDefinition(

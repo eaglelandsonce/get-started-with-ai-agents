@@ -146,6 +146,21 @@ To customize agent instructions or tools when creating **new agents**, modify th
 - **Agent Tools**: Modify the `get_available_tool()` function to add or change tools available to the agent
 - **Agent Model**: Change the model by updating the `AZURE_AI_AGENT_DEPLOYMENT_NAME` environment variable
 
+### Quick Classroom Demo Customization
+
+For a simple classroom demo, this repo now includes:
+
+- A sample handbook file at `src/files/student_handbook.md`
+- An optional classroom instruction mode controlled by `CLASSROOM_DEMO_MODE`
+
+To enable the demo behavior:
+
+1. Open your `.azure/<environment-name>/.env` file.
+2. Set `CLASSROOM_DEMO_MODE=true`.
+3. Recreate the agent so new instructions and files are applied (delete the existing agent in Foundry UI, then restart local server or run `azd deploy`).
+
+When enabled, the agent behaves as a "Campus Helper Bot" and answers using only uploaded files, with citations.
+
 ### Modifying Existing Agents
 
 **Important**: If you want to modify an **existing agent** that's already deployed, it's recommended to use the **Microsoft Foundry UI** instead of the script:
